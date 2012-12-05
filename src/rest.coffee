@@ -11,7 +11,7 @@ class Rest extends Adapter
     if strings.length > 0
       request.post(sendMessageUrl+user.channel).form({
         message:(strings.shift()),
-        from: user.user
+        from: 'hubot'
       })
       @send user, strings...
 
@@ -27,9 +27,9 @@ class Rest extends Adapter
 
     # expect {message, from, options}
     @robot.router.post '/receive/:channel', (req, res) ->
-      console.log req.params.channel, req.params, req.body.message
+      console.log req.params.channel, req.body.from, req.body.message
       res.setHeader 'content-type', 'text/html'
-      self.receive new TextMessage({channel: req.params.channel, user:'test'}, req.body.message)
+      self.receive new TextMessage({channel: req.params.channel, user: req.body.from}, req.body.message)
       res.end 'hi'
 
     self.emit "connected"
