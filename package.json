@@ -1,0 +1,10 @@
+{
+  "name": "hubot-rest",
+  "version" : "0.0.1",
+  "author": "steve klise",
+  "main": "./src/rest",
+  "devDependencies": {
+    "coffee-script": "1.1.3"
+  },
+  "readme": "holla"
+}
