@@ -23,13 +23,14 @@ class Rest extends Adapter
 
     options = {}
 
-    # console.log(@robot)
-
     # expect {message, from, options}
     @robot.router.post '/receive/:channel', (req, res) ->
-      console.log req.params.channel, req.body.from, req.body.message
+
       res.setHeader 'content-type', 'text/html'
-      self.receive new TextMessage({channel: req.params.channel, user: req.body.from}, req.body.message)
+      self.receive new TextMessage({
+        channel: req.params.channel,
+        user: req.body.from,
+        options: req.body.options}, req.body.message)
       res.end 'hi'
 
     self.emit "connected"
