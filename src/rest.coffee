@@ -36,7 +36,7 @@ class RestAdapter extends Adapter
     options = {}
 
     @robot.router.post '/receive/:room', (req, res) ->
-      user = @createUser(req.body.from, req.params.room)
+      user = self.createUser(req.body.from, req.params.room)
       res.setHeader 'content-type', 'text/html'
       self.receive new TextMessage(user, req.body.message)
       res.end 'received'
