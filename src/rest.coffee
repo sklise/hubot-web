@@ -21,7 +21,7 @@ class RestAdapter extends Adapter
 
   send: (user, strings...) ->
     if strings.length > 0
-      request.post(sendMessageUrl+user.channel).form({
+      request.post(sendMessageUrl+user.room).form({
         message:(strings.shift()),
         from: 'hubot'
       })
@@ -37,6 +37,7 @@ class RestAdapter extends Adapter
 
     @robot.router.post '/receive/:room', (req, res) ->
       user = self.createUser(req.body.from, req.params.room)
+
       res.setHeader 'content-type', 'text/html'
       self.receive new TextMessage(user, req.body.message)
       res.end 'received'
