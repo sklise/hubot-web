@@ -23,7 +23,7 @@ class RestAdapter extends Adapter
     if strings.length > 0
       request.post(sendMessageUrl+user.room).form({
         message:(strings.shift()),
-        from: 'hubot'
+        from: "#{@robot.name}"
       })
       @send user, strings...
 

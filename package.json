@@ -1,6 +1,6 @@
 {
   "name": "hubot-rest",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "author": "steve klise",
   "main": "./src/rest",
   "devDependencies": {
