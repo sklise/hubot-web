@@ -1,7 +1,9 @@
 {
-  "name": "hubot-http",
+  "name": "hubot-web",
   "version": "0.0.4",
-  "author": "steve klise",
+  "author": {
+    "name": "steve klise"
+  },
   "main": "./index",
   "devDependencies": {
     "coffee-script": "1.1.3"
@@ -12,10 +14,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/stevenklise/hubot-http.git"
+    "url": "git://github.com/stevenklise/hubot-web.git"
   },
   "keywords": [
-    "hubot", "http", "adapter"
+    "hubot",
+    "http",
+    "adapter"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "readme": "# Hubot Web Adapter\n\nAn adapter for [Hubot](https://github.com/github/hubot) to work via HTTP. Great for your custom web chat interface.\n\n## Setup\n\nSet `HUBOT_REST_SEND_URL` as an environment variable to send hubot responses to.\n\nAlso, if you're running hubot on Heroku, set your Procfile as a web process and not an app.",
+  "readmeFilename": "readme.md",
+  "_id": "hubot-web@0.0.4",
+  "_from": "hubot-web@latest"
 }

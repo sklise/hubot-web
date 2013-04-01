@@ -6,7 +6,7 @@ request = require('request')
 # sendmessageURL domain.com/messages/new/channel/ + user.channel
 sendMessageUrl = process.env.HUBOT_REST_SEND_URL
 
-class RestAdapter extends Adapter
+class WebAdapter extends Adapter
 
   createUser: (username, room) ->
     user = @userForName username
@@ -45,4 +45,4 @@ class RestAdapter extends Adapter
     self.emit "connected"
 
 exports.use = (robot) ->
-  new RestAdapter robot
+  new WebAdapter robot
