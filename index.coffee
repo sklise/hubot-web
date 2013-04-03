@@ -2,11 +2,15 @@ Robot = require('hubot').Robot
 Adapter = require('hubot').Adapter
 TextMessage = require('hubot').TextMessage
 request = require('request')
+string = require("string")
 
 # sendmessageURL domain.com/messages/new/channel/ + user.channel
 sendMessageUrl = process.env.HUBOT_REST_SEND_URL
 
 class WebAdapter extends Adapter
+  toHTML: (message) ->
+    message = string(message).escapeHTML().s
+    message.replace(/\n/g, "<br>")
 
   createUser: (username, room) ->
     user = @userForName username
@@ -21,8 +25,11 @@ class WebAdapter extends Adapter
 
   send: (user, strings...) ->
     if strings.length > 0
+
+      message = if process.env.HUBOT_HTML_RESPONSE then @toHTML(strings.shift()) else strings.shift()
+
       request.post(sendMessageUrl+user.room).form({
-        message:(strings.shift()),
+        message: message,
         from: "#{@robot.name}"
       })
       @send user, strings...
@@ -37,6 +44,8 @@ class WebAdapter extends Adapter
 
     @robot.router.post '/receive/:room', (req, res) ->
       user = self.createUser(req.body.from, req.params.room)
+
+      console.log "[#{req.params.room}] #{user.name} => #{req.body.message}"
 
       res.setHeader 'content-type', 'text/html'
       self.receive new TextMessage(user, req.body.message)
