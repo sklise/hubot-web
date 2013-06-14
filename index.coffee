@@ -9,7 +9,7 @@ sendMessageUrl = process.env.HUBOT_REST_SEND_URL
 
 class WebAdapter extends Adapter
   toHTML: (message) ->
-    message = string(message).escapeHTML().s
+    # message = string(message).escapeHTML().s
     message.replace(/\n/g, "<br>")
 
   createUser: (username, room) ->
@@ -44,6 +44,11 @@ class WebAdapter extends Adapter
 
     @robot.router.post '/receive/:room', (req, res) ->
       user = self.createUser(req.body.from, req.params.room)
+
+      if req.body.options
+        user.options = JSON.parse(req.body.options)
+      else
+        user.options = {}
 
       console.log "[#{req.params.room}] #{user.name} => #{req.body.message}"
 
