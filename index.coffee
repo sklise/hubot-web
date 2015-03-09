@@ -13,10 +13,10 @@ class WebAdapter extends Adapter
     message.replace(/\n/g, "<br>")
 
   createUser: (username, room) ->
-    user = @userForName username
+    user = @robot.brain.userForName username
     unless user?
       id = new Date().getTime().toString()
-      user = @userForId id
+      user = @robot.brain.userForId id
       user.name = username
 
     user.room = room
